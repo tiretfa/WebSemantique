@@ -7,15 +7,21 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Turtle {
-	HashMap<String,String> author;
-	HashMap<String,String> publisher;
+	HashMap<String,String> authors;
+	HashMap<String,String> publishers;
 	
-	  public static void turtle(String input, String output) throws IOException {
+	public Turtle(){
+		authors = new HashMap<>();
+		publishers = new HashMap<>();	
+	}
+	
+	  public void turtle(String input, String output) throws IOException {
 	    BufferedReader br = new BufferedReader(new FileReader(input));
 //	    BufferedWriter bw = new BufferedWriter(new FileWriter(output));
 	    UUID id ;
 	    
-	    String line, author = "", publisher = "";
+	    String line, author = "", publisher = "", bookTitle = "", pagesNb = "", isbn = "";
+	    UUID idAuthor, idPublisher, idBook;
 	    Boolean firstline = true;
 	    while ((line = br.readLine()) != null) {
 		    if(firstline){	
@@ -26,9 +32,12 @@ public class Turtle {
 		    			author = newLine[i];
 		    		}else if(i == 1 ){
 		    			author += " " +newLine[i];
+		    			
+		    		}else if(i == 2){
+		    			
 		    		}
 		    	}
-//		    	for(String s : newline){
+//		    	for(String s : newLine){
 //		    		id = UUID.randomUUID();
 //		    		System.out.println(s + " " + id);
 //		    	}
@@ -43,7 +52,7 @@ public class Turtle {
 	  }
 	  
 	  public static void main (String[] args) throws IOException{
-		  Turtle.turtle("artemisBookstoreData-v1.csv", "");
+		  
 	  }
 	
 }
