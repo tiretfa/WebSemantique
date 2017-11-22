@@ -6,18 +6,18 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Turtle {
+public class GenerateBookstore {
 	HashMap<String,UUID> authors;
 	HashMap<String,UUID> publishers;
 	
-	public Turtle(){
+	public GenerateBookstore(){
 		authors = new HashMap<>();
 		publishers = new HashMap<>();	
 	}
 
-	public void generateShortRtfXML(String input, String output) throws IOException{
+	public void generateRtfXML(String input, String output, Boolean all) throws IOException{
 
-		generateTurtle(input, "temp.ttl", false);
+		generateTurtle(input, "temp.ttl", all);
 		Model model = ModelFactory.createDefaultModel();
 		InputStream in = FileManager.get().open( "temp.ttl" );
 
@@ -68,8 +68,12 @@ public class Turtle {
 				UUIDBook = UUID.randomUUID();
 				UUIDPublisher = UUID.randomUUID();
 
-				firstName = author.split(" ")[1];
 				lastName = author.split(" ")[0];
+
+				if(author.split(" ").length == 2)
+					firstName = author.split(" ")[1];
+				else if(author.split(" ").length == 3)
+					firstName = author.split(" ")[1] + author.split(" ")[2];
 
 				System.out.println("");
 
@@ -110,8 +114,9 @@ public class Turtle {
 				String[] newLine = line.split(";");
 
 				author=newLine[0] + " " + newLine[1];
-				firstName = author.split(" ")[1].replace("\"", "");
-				lastName = author.split(" ")[0].replace("\"", "");
+
+				firstName = newLine[1].replace("\"", "");
+				lastName = newLine[0].replace("\"", "");
 
 				if(this.authors.containsKey(author)){
 					UUIDAuthor = this.authors.get(author);
@@ -175,9 +180,16 @@ public class Turtle {
 	}
 
 	public static void main (String[] args) throws IOException{
-		Turtle turtle = new Turtle();
-		turtle.generateShortRtfXML("artemisBookstoreData-v1.csv", "artemisBookstoreData-v1.rtf");
-		turtle.generateTurtle("artemisBookstoreData-v1.csv", "artemisBookstoreData-v1.ttl", true);
-		turtle.readTurtle("artemisBookstoreData-v1.ttl");
+		GenerateBookstore generator = new GenerateBookstore();
+
+		// Génération d'un fichier rdf au format turtle
+		generator.generateTurtle("artemisBookstoreData-v1.csv", "artemisBookstoreData-v1.ttl", true);
+
+		// Permet la validation du fichier généré
+		generator.readTurtle("artemisBookstoreData-v1.ttl");
+
+		// Génère la première ligne de données au format rtf/xml
+		// Cela permet de valider le graph grâce au validator disponible à l'URL: https://www.w3.org/RDF/Validator/
+		generator.generateRtfXML("artemisBookstoreData-v1.csv", "artemisBookstoreData-v1.rtf", false);
 	}
 }
