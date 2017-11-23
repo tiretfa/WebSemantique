@@ -31,8 +31,7 @@ public class Turtle {
 		    if(!firstline){	
 		    	String[] newLine = line.split(";");
 	    		    
-//		    	i++;
-//		    	System.out.println(i + " " + newLine.length );
+
 		    	
     			author = newLine[0];    
     			author += " " +newLine[1];
