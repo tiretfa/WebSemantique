@@ -1,0 +1,113 @@
+WEBSEMANTIQUE
+REPONSES AU TP2 - MERCREDI 29 NOVEMBRE 2017
+
+EXERCICE 1
+
+1. Cette requete permet d'obtenir les personnes qui sont nées à Grenoble, leur label et un résumé qui leur correspond.
+2. l'URI de rdfs est http://www.w3.org/2000/01/rdf-schema#
+	L'URI de dbo est http://dbpedia.org/ontology/
+	L'URI de dbr est http://dbpedia.org/resource/
+	
+3. http://dbpedia.org/resource/Alban_Préaubert est le lien de la ressource sur dbpedia concernant la personne Alban Préaubert
+	Il y a plusieurs ligne en fonction des langues disponibles pour l'abstract.
+
+4. Le lien nous renvoi sur la page http://dbpedia.org/page/Alban_Pr%C3%A9aubert qui est la version html de la ressource.
+
+5. Il s'agit d'un mécanisme de négociation de contenu.
+	Le header de la requête HTTP permet de sélectionner le format de la réponse attendue.
+	Une demande machine à la place d'une requête du navigateur fournira les éléments présents à l'URL http://dbpedia.org/resource/Alban_Préaubert.xml
+
+6. Le résultat est vide car il faut préciser la langue dans la sélection et mettre la valeur suivante pour le label:
+	"Alban Préaubert"@en
+
+7. La requête suivante permet de sélectionner uniquement les abstract avec les langues français et anglais:
+
+SELECT DISTINCT ?person ?abstract WHERE {
+   ?person rdfs:label "Alban Préaubert"@en ;
+             dbo:abstract ?abstract .
+    FILTER ( lang(?abstract) = "en" || lang(?abstract) = "fr" )
+}
+
+EXERCICE 2
+
+1. Pour trouver les propriétés de l'écrivain Paul Préaubert, on peut utilier la requête suivante:
+
+SELECT DISTINCT ?person ?property ?value WHERE { 
+   ?person rdfs:label "Alban Préaubert"@en .
+   ?person ?property ?value .
+   FILTER(isLiteral(?value))
+}
+
+Ici nous ne gardons que les propriétés qui ont une valeur littérale
+
+2. La requête suivante permet d'obtenir le lieu et la date de naissance de Alban Préaubert
+
+SELECT DISTINCT ?person ?birthdate ?birthplace WHERE {
+   ?person rdfs:label "Alban Préaubert"@en .
+   ?person <http://dbpedia.org/ontology/birthDate> ?birthdate .
+   ?person <http://dbpedia.org/property/birthPlace> ?birthplace
+}
+
+3. La requête suivante permet de savoir si Alban Préaubert a une date de décès définie
+
+ASK  { 
+     ?person rdfs:label "Alban Préaubert"@en .
+     ?person <http://dbpedia.org/ontology/deathDate> ?deatDate .
+}
+
+4. La requête SPARQL pour connaître toutes les classes dont Paul Auster est une instance est la suivante:
+
+SELECT DISTINCT ?person ?property ?value WHERE { 
+   ?person rdfs:label "Paul Auster"@en .
+   ?person ?property ?value .
+   FILTER(!isLiteral(?value))
+}
+ On récupère les propriétés de Paul Austères qui ne sont pas des valeurs litérales
+ 
+La classe qui paraît le plus apropriée pour déterminer que Paul Auster est un écrivain est la suivante:
+	http://dbpedia.org/ontology/Writer
+	
+5. La requête permettant de retrouver les noms de tous les écrivains dbpedia est:
+
+select distinct ?name where { 
+   ?property <http://dbpedia.org/ontology/writer> ?value .
+   ?value dbp:name ?name
+} LIMIT 100
+
+Il est possible de les compter:
+
+select count(distinct ?name) where { 
+   ?property <http://dbpedia.org/ontology/writer> ?value .
+   ?value dbp:name ?name
+}
+
+Il y a 5861 écrivains différents dans dbpedia
+
+6. La requête suivante permet de connaître le nombre d'écrivains qui sont nés aux USA
+
+select count(distinct ?name) where { 
+   ?property <http://dbpedia.org/ontology/writer> ?value .
+   ?value dbp:name ?name .
+   ?value dbo:birthPlace ?birthplace .
+   ?birthplace dbo:country dbr:United_States .
+} 
+ 
+Il y a 1208 écrivains
+
+7. La requête pour trouver les liens entre les deux personnes Paul Auster et Lydia Davis est la suivante:
+
+SELECT DISTINCT ?person1 ?link ?person2 WHERE { 
+   ?person1 rdfs:label "Paul Auster"@en .
+   ?person2 rdfs:label "Lydia Davis"@en .
+   ?person1 ?link ?person2
+}
+
+Le lien est le suivant: http://dbpedia.org/ontology/spouse
+Les deux personnages sont mariés.
+
+8. La requête pour trouver toutes les personnes mariées est:
+
+SELECT DISTINCT ?person1 WHERE {
+   ?ressource <http://dbpedia.org/ontology/writer> ?person1 .
+   ?person1 <http://dbpedia.org/ontology/spouse> ?person2 .
+}
