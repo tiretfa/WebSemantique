@@ -115,15 +115,16 @@ SELECT DISTINCT ?person1 WHERE {
 EXERCICE 3
 
 1. La requête qui permet d'obtenir les auteurs américains ainsi que leur URI est la suivante:
-PREFIX dbp: <http://dbpedia.org/property/>
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT DISTINCT ?name ?value where {
-   ?property dbo:writer ?value .
-   ?value dbp:name ?name .
-   ?value dbo:birthPlace ?birthplace .
-   ?birthplace dbo:country dbr:United_States .
+    {?value rdf:type dbo:Writer} UNION {?value dbo:occupation dbr:Writer} .
+    ?value foaf:name ?name .
+    ?value dbo:birthPlace ?birthplace .
+    ?birthplace dbo:country dbr:United_States .
 }
 
 La commande utilisée pour générer le fichier .csv est la suivante:

@@ -1,4 +1,65 @@
 WEBSEMANTIQUE
 REPONSES AU TP3 - MERCREDI 6 DECEMBRE 2017
 
-EXERCICE 1
+1. REQUETES FEDEREES
+
+1. Le fichier contenant les liens avec dbpedia a été généré grâce à un script édité durant le TP2.
+Il est présent dans ce dossier sous le nom artemisBookstoreData-v2.ttl.
+Une version au format RTF/XML est également présente avec l'extension .rtf.
+
+2. Le fichier test1.rq contient une requête permettant de retrouver l'ensemble des titres des livres de Paul Auster
+présent dans le jeu de données précédemment constitué.
+
+3. La requête fédérée avec dbpedia qui permet de trouver la ville de naissance d'un auteur est la suivante:
+
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?birthPlaceName
+
+WHERE
+{
+    ?auth   foaf:firstName "Norman" ;
+            foaf:lastName "Mailer" ;
+            owl:sameAs ?dbpr .
+
+    SERVICE <http://dbpedia.org/sparql>{
+        ?dbpr dbo:birthPlace ?birthPlace .
+        ?birthPlace foaf:name ?birthPlaceName
+    }
+}
+
+Elle est également présente dans le fichier test2.rd
+
+4. La requête fédérée avec dbPedia qui permet de vérifier si le jeu de données contient des personnes avec lesquelles
+Paul Auster a été marié est:
+
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+
+ASK WHERE{
+    {
+    SELECT (COUNT(?authSpouse) AS ?nb)
+        WHERE
+        {
+            ?auth   foaf:firstName "Paul" ;
+                    foaf:lastName "Auster" ;
+                    owl:sameAs ?dbpr .
+
+            SERVICE <http://dbpedia.org/sparql>{
+                ?dbpr dbo:spouse ?spouse .
+            }
+
+            ?authSpouse owl:sameAs ?spouse
+        }
+    }
+    FILTER (?nb > 0)
+}
+
+Cette requête est également dans le fichier test3.rd
+
+5.

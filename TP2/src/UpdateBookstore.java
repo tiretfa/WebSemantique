@@ -41,8 +41,10 @@ public class UpdateBookstore {
                     uri = uriTab[4];
                 }
 
-                if(!this.americanWriters.containsKey(americanWriter))
+                if(!this.americanWriters.containsKey(americanWriter)){
                     this.americanWriters.put(americanWriter,uri);
+                }
+
             }
         }
         br.close();
@@ -75,7 +77,7 @@ public class UpdateBookstore {
                 String testAmericanWriter = firstName.trim() + " " + lastName.trim();
 
                 if(this.americanWriters.containsKey(testAmericanWriter)){
-                    Resource writer = model.createResource("dbr:" + this.americanWriters.get(testAmericanWriter));
+                    Resource writer = model.createResource("http://dbpedia.org/resource/" + this.americanWriters.get(testAmericanWriter));
                     model.add(subject, OWL.sameAs, writer);
                     nbLink++;
                 }

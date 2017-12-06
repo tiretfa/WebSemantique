@@ -9,4 +9,3 @@ WHERE  {
     ?auth foaf:lastName "Auster" .
     ?subject dcterms:title ?title .
 }
-LIMIT 100
