@@ -28,6 +28,8 @@ SELECT DISTINCT ?person ?abstract WHERE {
     FILTER ( lang(?abstract) = "en" || lang(?abstract) = "fr" )
 }
 
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex1_Q7_Reponse.csv
+
 EXERCICE 2
 
 1. Pour trouver les propriétés de l'écrivain Paul Préaubert, on peut utilier la requête suivante:
@@ -40,6 +42,8 @@ SELECT DISTINCT ?person ?property ?value WHERE {
 
 Ici nous ne gardons que les propriétés qui ont une valeur littérale
 
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q1_Reponse.csv
+
 2. La requête suivante permet d'obtenir le lieu et la date de naissance de Alban Préaubert
 
 SELECT DISTINCT ?person ?birthdate ?birthplace WHERE {
@@ -48,12 +52,16 @@ SELECT DISTINCT ?person ?birthdate ?birthplace WHERE {
    ?person <http://dbpedia.org/property/birthPlace> ?birthplace
 }
 
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q2_Reponse.csv
+
 3. La requête suivante permet de savoir si Alban Préaubert a une date de décès définie
 
 ASK  { 
      ?person rdfs:label "Alban Préaubert"@en .
      ?person <http://dbpedia.org/ontology/deathDate> ?deatDate .
 }
+
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q3_Reponse.csv
 
 4. La requête SPARQL pour connaître toutes les classes dont Paul Auster est une instance est la suivante:
 
@@ -62,8 +70,11 @@ SELECT DISTINCT ?person ?property ?value WHERE {
    ?person ?property ?value .
    FILTER(!isLiteral(?value))
 }
- On récupère les propriétés de Paul Austères qui ne sont pas des valeurs litérales
- 
+
+On récupère les propriétés de Paul Austères qui ne sont pas des valeurs litérales
+
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q4_Reponse.csv
+
 La classe qui paraît le plus apropriée pour déterminer que Paul Auster est un écrivain est la suivante:
 	http://dbpedia.org/ontology/Writer
 	
@@ -74,12 +85,16 @@ select distinct ?name where {
    ?value dbp:name ?name
 } LIMIT 100
 
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q5_1_Reponse.csv
+
 Il est possible de les compter:
 
 select count(distinct ?name) where { 
    ?property <http://dbpedia.org/ontology/writer> ?value .
    ?value dbp:name ?name
 }
+
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q5_2_Reponse.csv
 
 Il y a 5861 écrivains différents dans dbpedia
 
@@ -91,7 +106,9 @@ select count(distinct ?name) where {
    ?value dbo:birthPlace ?birthplace .
    ?birthplace dbo:country dbr:United_States .
 } 
- 
+
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q6_Reponse.csv
+
 Il y a 1208 écrivains
 
 7. La requête pour trouver les liens entre les deux personnes Paul Auster et Lydia Davis est la suivante:
@@ -101,6 +118,8 @@ SELECT DISTINCT ?person1 ?link ?person2 WHERE {
    ?person2 rdfs:label "Lydia Davis"@en .
    ?person1 ?link ?person2
 }
+
+Le résultat de l'exécution de cette requête se trouve dans le fichier TP2_Ex2_Q7_Reponse.csv
 
 Le lien est le suivant: http://dbpedia.org/ontology/spouse
 Les deux personnages sont mariés.
@@ -112,7 +131,7 @@ SELECT DISTINCT ?person1 WHERE {
    ?person1 <http://dbpedia.org/ontology/spouse> ?person2 .
 }
 
-EXERCICE 3
+EXERCICE 3 : RECUPERER LES ECRIVAINS DE DBPEDIA
 
 1. La requête qui permet d'obtenir les auteurs américains ainsi que leur URI est la suivante:
 PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -129,3 +148,13 @@ SELECT DISTINCT ?name ?value where {
 
 La commande utilisée pour générer le fichier .csv est la suivante:
 rsparql --service http://dbpedia.org/sparql --query dbpediaAmericanWriter.rq --results csv > dbpediaAmericanWriter.csv
+
+Le fichier généré pour cette question est le suivant: dbpediaAmericanWriter.csv
+
+EXERCICE 4: CREER DES LIENS ENTRE VOS DONNEES ET DBPEDIA
+
+Le fichier exécutable qui permet de rajouter des liens entre les données du TP précédent et les écrivains de DBPedia
+est le fichier UpdateBookstore.
+
+Le fichier artemisBookstoreData-v2.ttl est le fichier au format Turtle qui contient les liens vers DBPedia répondant
+ainsi à la question posée.

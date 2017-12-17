@@ -1,0 +1,11 @@
+@prefix res: <http://www.w3.org/2005/sparql-results#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+_:_ a res:ResultSet .
+_:_ res:resultVariable "person" , "abstract" .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+_:_ res:solution [
+      res:binding [ res:variable "person" ; res:value dbr:Alban_Préaubert ] ;
+      res:binding [ res:variable "abstract" ; res:value "Alban Pr\u00E9aubert (born 20 September 1985) is a French former competitive figure skater. He won six ISU Grand Prix medals and five French national bronze medals (2006, 2008\u201311)."@en ] ] .
+_:_ res:solution [
+      res:binding [ res:variable "person" ; res:value dbr:Alban_Préaubert ] ;
+      res:binding [ res:variable "abstract" ; res:value "Alban Pr\u00E9aubert (n\u00E9 le 20 septembre 1985 \u00E0 Grenoble) est un patineur artistique fran\u00E7ais. Il est cinq fois m\u00E9daill\u00E9 de bronze aux championnats de France (2006, 2008, 2009, 2010, 2011)."@fr ] ] .
