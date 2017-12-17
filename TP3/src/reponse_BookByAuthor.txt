@@ -1,0 +1,17 @@
+Veuillez saisir le prenom de l'auteur :
+Paul
+Veuillez saisir le nom de l'auteur :
+Auster
+Les livres écrits par Paul Auster sont:
+	- Travels in the Scriptorium
+	- Winter Journal
+	- Timbuktu (novella)
+	- The Book of Illusions
+	- The Brooklyn Follies
+	- Oracle Night
+	- Leviathan (Auster novel)
+	- Mr. Vertigo
+	- Man in the Dark (novel)
+	- Invisible (Auster novel)
+	- Moon Palace
+	- Sunset Park (novel)

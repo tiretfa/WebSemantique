@@ -1,0 +1,76 @@
+---------------------------------------------------------------
+| authTitle                    | authSpouseTitle              |
+===============================================================
+| "The Sorrows of an American" | "The Book of Illusions"      |
+| "The Sorrows of an American" | "Oracle Night"               |
+| "The Sorrows of an American" | "Man in the Dark (novel)"    |
+| "The Sorrows of an American" | "Timbuktu (novella)"         |
+| "The Sorrows of an American" | "Invisible (Auster novel)"   |
+| "The Sorrows of an American" | "Winter Journal"             |
+| "The Sorrows of an American" | "Moon Palace"                |
+| "The Sorrows of an American" | "Mr. Vertigo"                |
+| "The Sorrows of an American" | "The Brooklyn Follies"       |
+| "The Sorrows of an American" | "Sunset Park (novel)"        |
+| "The Sorrows of an American" | "Travels in the Scriptorium" |
+| "The Sorrows of an American" | "Leviathan (Auster novel)"   |
+| "What I Loved"               | "The Book of Illusions"      |
+| "What I Loved"               | "Oracle Night"               |
+| "What I Loved"               | "Man in the Dark (novel)"    |
+| "What I Loved"               | "Timbuktu (novella)"         |
+| "What I Loved"               | "Invisible (Auster novel)"   |
+| "What I Loved"               | "Winter Journal"             |
+| "What I Loved"               | "Moon Palace"                |
+| "What I Loved"               | "Mr. Vertigo"                |
+| "What I Loved"               | "The Brooklyn Follies"       |
+| "What I Loved"               | "Sunset Park (novel)"        |
+| "What I Loved"               | "Travels in the Scriptorium" |
+| "What I Loved"               | "Leviathan (Auster novel)"   |
+| "Varieties of Disturbance"   | "The Book of Illusions"      |
+| "Varieties of Disturbance"   | "Oracle Night"               |
+| "Varieties of Disturbance"   | "Man in the Dark (novel)"    |
+| "Varieties of Disturbance"   | "Timbuktu (novella)"         |
+| "Varieties of Disturbance"   | "Invisible (Auster novel)"   |
+| "Varieties of Disturbance"   | "Winter Journal"             |
+| "Varieties of Disturbance"   | "Moon Palace"                |
+| "Varieties of Disturbance"   | "Mr. Vertigo"                |
+| "Varieties of Disturbance"   | "The Brooklyn Follies"       |
+| "Varieties of Disturbance"   | "Sunset Park (novel)"        |
+| "Varieties of Disturbance"   | "Travels in the Scriptorium" |
+| "Varieties of Disturbance"   | "Leviathan (Auster novel)"   |
+| "The Book of Illusions"      | "The Sorrows of an American" |
+| "The Book of Illusions"      | "What I Loved"               |
+| "The Book of Illusions"      | "Varieties of Disturbance"   |
+| "Oracle Night"               | "The Sorrows of an American" |
+| "Oracle Night"               | "What I Loved"               |
+| "Oracle Night"               | "Varieties of Disturbance"   |
+| "Man in the Dark (novel)"    | "The Sorrows of an American" |
+| "Man in the Dark (novel)"    | "What I Loved"               |
+| "Man in the Dark (novel)"    | "Varieties of Disturbance"   |
+| "Timbuktu (novella)"         | "The Sorrows of an American" |
+| "Timbuktu (novella)"         | "What I Loved"               |
+| "Timbuktu (novella)"         | "Varieties of Disturbance"   |
+| "Invisible (Auster novel)"   | "The Sorrows of an American" |
+| "Invisible (Auster novel)"   | "What I Loved"               |
+| "Invisible (Auster novel)"   | "Varieties of Disturbance"   |
+| "Winter Journal"             | "The Sorrows of an American" |
+| "Winter Journal"             | "What I Loved"               |
+| "Winter Journal"             | "Varieties of Disturbance"   |
+| "Moon Palace"                | "The Sorrows of an American" |
+| "Moon Palace"                | "What I Loved"               |
+| "Moon Palace"                | "Varieties of Disturbance"   |
+| "Mr. Vertigo"                | "The Sorrows of an American" |
+| "Mr. Vertigo"                | "What I Loved"               |
+| "Mr. Vertigo"                | "Varieties of Disturbance"   |
+| "The Brooklyn Follies"       | "The Sorrows of an American" |
+| "The Brooklyn Follies"       | "What I Loved"               |
+| "The Brooklyn Follies"       | "Varieties of Disturbance"   |
+| "Sunset Park (novel)"        | "The Sorrows of an American" |
+| "Sunset Park (novel)"        | "What I Loved"               |
+| "Sunset Park (novel)"        | "Varieties of Disturbance"   |
+| "Travels in the Scriptorium" | "The Sorrows of an American" |
+| "Travels in the Scriptorium" | "What I Loved"               |
+| "Travels in the Scriptorium" | "Varieties of Disturbance"   |
+| "Leviathan (Auster novel)"   | "The Sorrows of an American" |
+| "Leviathan (Auster novel)"   | "What I Loved"               |
+| "Leviathan (Auster novel)"   | "Varieties of Disturbance"   |
+---------------------------------------------------------------

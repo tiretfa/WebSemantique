@@ -1,0 +1,7 @@
+----------------------------
+| birthPlaceName           |
+============================
+| "State of New Jersey"@en |
+| "Newark, New Jersey"@en  |
+| "City of Newark"@en      |
+----------------------------

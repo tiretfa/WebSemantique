@@ -1,103 +1,147 @@
 WEBSEMANTIQUE
 REPONSES AU TP3 - MERCREDI 6 DECEMBRE 2017
 
-1. REQUETES FEDEREES
+********************************************
+        1. REQUETES FEDEREES
+*********************************************
 
-1. Le fichier contenant les liens avec dbpedia a été généré grâce à un script édité durant le TP2.
+1. Si ce n'est pas déjà fait, créez un fichier RDF qui intègrent à vos données les liens owl:sameAs que vous avez découverts
+entre vos données et les données de DBPedia.
+
+Le fichier contenant les liens avec dbpedia a été généré grâce à un script édité durant le TP2.
 Il est présent dans ce dossier sous le nom artemisBookstoreData-v2.ttl.
 Une version au format RTF/XML est également présente avec l'extension .rtf.
 
-2. Le fichier test1.rq contient une requête permettant de retrouver l'ensemble des titres des livres de Paul Auster
+2. Ecrivez dans un fichier test1.rq une première requête SOARQL qui trouvent tous les livres de Paul Auster dont vous disposez.
+Tester-là en utilisant la commande sparql de Jena (option --help pour en savoir plus sur celle-ci)
+
+Le fichier test1.rq contient une requête permettant de retrouver l'ensemble des titres des livres de Paul Auster
 présent dans le jeu de données précédemment constitué.
 
-3. La requête fédérée avec dbpedia qui permet de trouver la ville de naissance d'un auteur est la suivante:
+Le fichier reponse_test1.txt contient la réponse de l'exécution de la requête test1.rq.
 
-PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
-PREFIX owl:   <http://www.w3.org/2002/07/owl#>
-PREFIX dbo: <http://dbpedia.org/ontology/>
+La requête que ce fichier contient est la suivante:
 
-SELECT ?birthPlaceName
+    PREFIX abo: <http://artemisBookstore.com/ontology#>
+    PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
 
-WHERE
-{
-    ?auth   foaf:firstName "Norman" ;
-            foaf:lastName "Mailer" ;
-            owl:sameAs ?dbpr .
-
-    SERVICE <http://dbpedia.org/sparql>{
-        ?dbpr dbo:birthPlace ?birthPlace .
-        ?birthPlace foaf:name ?birthPlaceName
+    SELECT ?title
+    WHERE  {
+        ?subject abo:author ?auth .
+        ?auth foaf:firstName "Paul" .
+        ?auth foaf:lastName "Auster" .
+        ?subject dcterms:title ?title .
     }
-}
+
+3. Ecrivez une requête avec DBPedia qui permet de trouver la ville de naissance de Paul Auster
+
+La requête fédérée avec dbpedia qui permet de trouver la ville de naissance d'un auteur est la suivante:
+
+    PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+    PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+
+    SELECT ?birthPlaceName
+
+    WHERE
+    {
+        ?auth   foaf:firstName "Norman" ;
+                foaf:lastName "Mailer" ;
+                owl:sameAs ?dbpr .
+
+        SERVICE <http://dbpedia.org/sparql>{
+            ?dbpr dbo:birthPlace ?birthPlace .
+            ?birthPlace foaf:name ?birthPlaceName
+        }
+    }
 
 Elle est également présente dans le fichier test2.rd
 
-4. La requête fédérée avec dbPedia qui permet de vérifier si le jeu de données contient des personnes avec lesquelles
+Le fichier reponse_test2.txt contient la réponse de l'exécution de la requête test2.rq.
+
+4. Ecrivez une requête fédérée avec DBPedia qui permet de vérifier si votre jeu de données contient des personnes
+avec lesquelles il a été marié (il s'agira donc d'une requête ASK).
+Tester-là avec la commande sparql.
+
+La requête fédérée avec dbPedia qui permet de vérifier si le jeu de données contient des personnes avec lesquelles
 Paul Auster a été marié est:
 
-PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
-PREFIX owl:   <http://www.w3.org/2002/07/owl#>
-PREFIX dbo: <http://dbpedia.org/ontology/>
-PREFIX dbp: <http://dbpedia.org/property/>
-PREFIX dbr: <http://dbpedia.org/resource/>
+    PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+    PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+    PREFIX dbo: <http://dbpedia.org/ontology/>
+    PREFIX dbp: <http://dbpedia.org/property/>
+    PREFIX dbr: <http://dbpedia.org/resource/>
 
-ASK WHERE{
-    {
-    SELECT (COUNT(?authSpouse) AS ?nb)
+    ASK WHERE{
+        {
+        SELECT (COUNT(?authSpouse) AS ?nb)
+            WHERE
+            {
+                ?auth   foaf:firstName "Paul" ;
+                        foaf:lastName "Auster" ;
+                        owl:sameAs ?dbpr .
+
+                SERVICE <http://dbpedia.org/sparql>{
+                    ?dbpr dbo:spouse ?spouse .
+                }
+
+                ?authSpouse owl:sameAs ?spouse
+            }
+        }
+        FILTER (?nb > 0)
+    }
+
+Cette requête est également dans le fichier test3.rd
+
+Le fichier reponse_test3.txt contient la réponse de l'exécution de la requête test3.rq.
+
+La requête test3_bis.rd permet d'obtenir le nom des deux femmes de Paul Auster.
+Le fichier reponse_test3_bis.txt est la réponse à la requête obtenue grâce à la commande sparql.
+
+Paul Auster a deux femmes présentes dans notre jeu de données:
+    - Siri Hustvedt
+    - Lydia Davis
+
+5. Ecrivez une requête fédérée permettant de répondre à la question:
+    Trouvez dans votre librairie toutes les paires de livres écrits par des couples mariés dont les deux membres sont encore en vie.
+
+La requête qui permet de trouver dans notre librairie toutes les paires de livres écrits par des couples mariés dont les deux
+membres sont encore en vie
+
+    PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
+    PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+    PREFIX dbo:     <http://dbpedia.org/ontology/>
+    PREFIX dbp:     <http://dbpedia.org/property/>
+    PREFIX dbr:     <http://dbpedia.org/resource/>
+    PREFIX abo:     <http://artemisBookstore.com/ontology#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+
+    SELECT ?authTitle ?authSpouseTitle
         WHERE
         {
-            ?auth   foaf:firstName "Paul" ;
-                    foaf:lastName "Auster" ;
+            ?auth   foaf:firstName ?authFirstName ;
+                    foaf:lastName ?authLastName ;
                     owl:sameAs ?dbpr .
+
+            ?authBook   abo:author ?auth;
+                    dcterms:title ?authTitle
 
             SERVICE <http://dbpedia.org/sparql>{
                 ?dbpr dbo:spouse ?spouse .
             }
 
-            ?authSpouse owl:sameAs ?spouse
-        }
-    }
-    FILTER (?nb > 0)
-}
+            ?authSpouse foaf:firstName ?authSpouseFirstName ;
+                        foaf:lastName ?authSpouseLastName ;
+                        owl:sameAs ?spouse .
 
-Cette requête est également dans le fichier test3.rd
-
-5. La requête qui permet de trouver dans notre librairie toutes les paires de livres écrits par des couples mariés dont les deux
-membres sont encore en vie
-
-PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
-PREFIX owl:     <http://www.w3.org/2002/07/owl#>
-PREFIX dbo:     <http://dbpedia.org/ontology/>
-PREFIX dbp:     <http://dbpedia.org/property/>
-PREFIX dbr:     <http://dbpedia.org/resource/>
-PREFIX abo:     <http://artemisBookstore.com/ontology#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-
-SELECT ?authTitle ?authSpouseTitle
-    WHERE
-    {
-        ?auth   foaf:firstName ?authFirstName ;
-                foaf:lastName ?authLastName ;
-                owl:sameAs ?dbpr .
-
-        ?authBook   abo:author ?auth;
-                dcterms:title ?authTitle
-
-        SERVICE <http://dbpedia.org/sparql>{
-            ?dbpr dbo:spouse ?spouse .
-        }
-
-        ?authSpouse foaf:firstName ?authSpouseFirstName ;
-                    foaf:lastName ?authSpouseLastName ;
-                    owl:sameAs ?spouse .
-
-        ?authSpouseBook   abo:author ?authSpouse;
+            ?authSpouseBook   abo:author ?authSpouse;
                           dcterms:title ?authSpouseTitle
 
-        FILTER NOT EXISTS{
-            SERVICE <http://dbpedia.org/sparql>{
-                ?dbpr dbo:deathDate ?deathDate .
-            }
+            FILTER NOT EXISTS{
+                SERVICE <http://dbpedia.org/sparql>{
+                    ?dbpr dbo:deathDate ?deathDate .
+                }
         }
 
         FILTER NOT EXISTS{
@@ -108,3 +152,34 @@ SELECT ?authTitle ?authSpouseTitle
     }
 
 Cette requête est également présente dans le fichier test4.rd
+
+Le fichier reponse_test4.txt contient la réponse de l'exécution de la requête test4.rq.
+Il s'agit des livres de Paul Auster et de ses deux femmes qui sont encore en vie (Siri Hustvedt et Lydia Davis)
+
+6. Question bonus
+Trouvez tous les auteurs de notre jeu de données qui sont nés dans un Etat déterminé.
+
+
+
+********************************************
+        3. API JENA arq
+*********************************************
+
+1. Ecrivez un programme Java qui permet d'afficher tous les livres d'un écrivain donné (le nom de l'écrivain est entré par l'utilisateur)
+
+Le fichier exécutable BookByAuthor permet d'afficher tous les livres d'un écrivain donné présents dans notre jeu de données.
+L'exécution du fichier BookByAuthor pour l'écrivain Paul Auster fournit la réponse présente dans le fichier reponse_BookByAuthor.txt.
+
+
+2. Ecrivez un programme Java qui, pour un écrivain donné, permet d'afficher quelques éléments bibliographiques issus de DBPedia:
+     - sa date de naissance
+     - son lieu de naissance
+     - le résumé DBPedia
+
+Les fichiers exécutables AuthorInfos et AuthorInfos_bis répondent à cette question. La résponse produite par le fichier AuthorInfos_bis
+est un peu pls travaillée puisqu'elle propose de reconstruire une structure de donnée (instruction CONSTRUCT) parcourue ensuite grâce
+à des instructions en JAVA.
+
+L'exécution du fichier AuthorInfos_bis pour l'écrivain Paul Auster fournit la réponse présente dans le fichier reponse_AuthorInfo.txt
+
+
