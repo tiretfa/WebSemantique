@@ -156,11 +156,6 @@ Cette requête est également présente dans le fichier test4.rd
 Le fichier reponse_test4.txt contient la réponse de l'exécution de la requête test4.rq.
 Il s'agit des livres de Paul Auster et de ses deux femmes qui sont encore en vie (Siri Hustvedt et Lydia Davis)
 
-6. Question bonus
-Trouvez tous les auteurs de notre jeu de données qui sont nés dans un Etat déterminé.
-
-
-
 ********************************************
         3. API JENA arq
 *********************************************
@@ -177,9 +172,19 @@ L'exécution du fichier BookByAuthor pour l'écrivain Paul Auster fournit la ré
      - le résumé DBPedia
 
 Les fichiers exécutables AuthorInfos et AuthorInfos_bis répondent à cette question. La résponse produite par le fichier AuthorInfos_bis
-est un peu pls travaillée puisqu'elle propose de reconstruire une structure de donnée (instruction CONSTRUCT) parcourue ensuite grâce
+est un peu plus travaillée puisqu'elle propose de reconstruire une structure de donnée (instruction CONSTRUCT) parcourue ensuite grâce
 à des instructions en JAVA.
 
 L'exécution du fichier AuthorInfos_bis pour l'écrivain Paul Auster fournit la réponse présente dans le fichier reponse_AuthorInfo.txt
 
 
+***********************************************
+        4. QUESTION BONUS
+***********************************************
+Trouvez tous les auteurs de notre jeu de données qui sont nés dans un Etat déterminé
+
+Les fichiers exécutables AuthorsByBirthPlace et AuthorByBirthPlace_bis répondent à cette question. La résponse produite par le fichier AuthorByBirthPlace_bis
+est un peu plus travaillée puisqu'elle propose de reconstruire une structure de donnée (instruction CONSTRUCT) parcourue ensuite grâce
+à des instructions en JAVA.
+
+L'exécution du fichier AuthorsByBirthPlace pour l'Etat du New Jersey fournit la réponse présente dans le fichier reponse_AuthorsByBirthPlace.txt

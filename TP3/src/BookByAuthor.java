@@ -65,7 +65,7 @@ public class BookByAuthor {
                     System.out.println("\t- " + subject.getProperty(DCTerms.title).getLiteral());
                 }
             } else {
-                System.out.println("Il n'y a pas de livres écrits par " + author.getProperty(FOAF.firstName).getLiteral() + " " + author.getProperty(FOAF.lastName).getLiteral() + " sont:");
+                System.out.println("Il n'y a pas de livres écrits par " + author.getProperty(FOAF.firstName).getLiteral() + " " + author.getProperty(FOAF.lastName).getLiteral() + ". ");
             }
 
         }

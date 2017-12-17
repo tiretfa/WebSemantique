@@ -1,0 +1,37 @@
+Veuillez saisir l'Etat choisi :
+New Jersey
+Les auteurs nés dans l'Etat de New_Jersey sont:
+	- Holly Black
+	- Lance Olsen
+	- Elise Primavera
+	- Richard Matheson
+	- Kelly Moore
+	- Robert S. McElvaine
+	- David Levithan
+	- Joshua Cohen
+	- Tom Perrotta
+	- Mark Budz
+	- Jeffrey Shaara
+	- Mitch Albom
+	- Laura Anne Gilman
+	- Wil McCarthy
+	- Larry Doyle
+	- F. Paul Wilson
+	- Jack Ketchum
+	- Janet Evanovich
+	- Matthew Quick
+	- Rinker Buck
+	- Andrew Clements
+	- Janet Kagan
+	- Darrell Schweitzer
+	- Peter Balakian
+	- Paul Auster
+	- Norman Mailer
+	- Iris Chang
+	- Marc Acito
+	- Judy Blume
+	- Jane Rule
+	- Henry S. Whitehead
+	- Emma Holly
+	- Brian Selznick
+	- Ward Moore
