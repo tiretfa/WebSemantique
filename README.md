@@ -9,3 +9,8 @@ Chaque dossier TPx contient les éléments suivants:
 * Un fichier TPx_Reponses.txt qui reprend les réponses aux questions posées
 * Les fichiers exécutables demandés
 * Les réponses des requêtes demandées dans des fichiers .txt ou .csv
+
+Les auteurs de ce dossier sont:
+
+* Fabien Tiret
+* Etienne Estrangin
